@@ -8,7 +8,7 @@ before_script:
 script: true
 after_success:
   - |
-    if [[ $TRAVIS_BRANCH == "master" ]]; then
+    if [[ $TRAVIS_BRANCH == "downstream" ]]; then
       ./deploy.sh || exit 1
     fi
 notifications:
