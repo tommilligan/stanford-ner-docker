@@ -160,6 +160,10 @@ class HttpHandler(BaseHTTPServer.BaseHTTPRequestHandler):
       'query', [None])[0]
     return self.build_response(query)
 
+  def end_headers (self):
+    self.send_header('Access-Control-Allow-Origin', '*')
+    BaseHTTPServer.BaseHTTPRequestHandler.end_headers(self)
+
 
 if __name__ == '__main__':
   print 'Starting Stanford NER TCP server...'
