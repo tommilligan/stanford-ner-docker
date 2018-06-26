@@ -6,12 +6,13 @@ RUN apt-get install -y \
     && apt-get clean  && \
     rm -rf /var/lib/apt/lists/*
 
-ADD http://nlp.stanford.edu/software/stanford-ner-2015-01-29.zip ner.zip
-RUN unzip ner.zip
+ENV STANFORD_NER_VERSION=stanford-ner-2018-02-27
 
-WORKDIR /stanford-ner-2015-01-30
+ADD "https://nlp.stanford.edu/software/${STANFORD_NER_VERSION}.zip" ner.zip
+RUN unzip ner.zip && rm ner.zip
+WORKDIR "${STANFORD_NER_VERSION}"
 
-ADD run.py run.py
+ADD run.py ./
 
-ENTRYPOINT ["python", "-u", "/stanford-ner-2015-01-30/run.py"]
+CMD ["python", "-u", "./run.py"]
 EXPOSE 80
