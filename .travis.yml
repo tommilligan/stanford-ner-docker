@@ -1,0 +1,17 @@
+
+sudo: required
+services:
+  - docker
+language: python
+before_script:
+  - docker build -t app .
+script: true
+after_success:
+  - |
+    if [[ $TRAVIS_BRANCH == "master" ]]; then
+      ./deploy.sh || exit 1
+    fi
+notifications:
+  email: false
+cache:
+  yarn: true
