@@ -165,7 +165,7 @@ if __name__ == '__main__':
   print 'Starting Stanford NER TCP server...'
   start_ner_server(STANFORD_PARSER, STANFORD_MODEL)
   print 'Starting HTTP proxy server...'
-  port = os.environ.get('PORT', 80)
+  port = int(os.environ.get('PORT', '80'))
   print 'Listening on port %s...' % port
   try:
     server = BaseHTTPServer.HTTPServer(('0.0.0.0', port), HttpHandler)
